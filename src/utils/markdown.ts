@@ -82,8 +82,10 @@ turndownService.addRule('ignoreUnwanted', {
 /**
  * Converts HTML string to clean Markdown.
  */
-export function htmlToMarkdown(html: string): string {
+export function htmlToMarkdown(html: string, linkStyle: 'inlined' | 'referenced' = 'inlined'): string {
   try {
+    // Dynamically set link style based on settings
+    turndownService.options.linkStyle = linkStyle;
     return turndownService.turndown(html);
   } catch (error) {
     console.error('Error converting HTML to Markdown:', error);

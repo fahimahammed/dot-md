@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Preview } from './Preview';
 import { parseHtml } from '../utils/readability';
 import { htmlToMarkdown } from '../utils/markdown';
-import { History, Settings, FileText, Trash2, Globe, AlertTriangle } from 'lucide-react';
+import { History, Settings, FileText, Trash2, AlertTriangle } from 'lucide-react';
 
 interface HistoryItem {
   id: string;
@@ -23,7 +23,7 @@ type TabType = 'preview' | 'history' | 'settings';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('preview');
-  
+
   // Page state
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,10 +36,15 @@ const App: React.FC = () => {
   const [capturedSelection, setCapturedSelection] = useState<CapturedSelection | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Settings preferences
+  const [defaultAi, setDefaultAi] = useState<string>('chatgpt');
+  const [linkStyle, setLinkStyle] = useState<string>('inlined');
+
   // Load extension state on startup
   useEffect(() => {
     loadHistory();
     checkCapturedSelection();
+    loadSettings();
     extractActiveTabContent();
   }, []);
 
@@ -69,14 +74,48 @@ const App: React.FC = () => {
     }
   };
 
+  const loadSettings = () => {
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+      chrome.storage.local.get(['settings'], (res) => {
+        if (res.settings) {
+          if (res.settings.defaultAiExport) setDefaultAi(res.settings.defaultAiExport);
+          if (res.settings.linkStyle) setLinkStyle(res.settings.linkStyle);
+        }
+      });
+    }
+  };
+
+  const handleSettingsChange = (key: string, value: string) => {
+    if (key === 'defaultAi') {
+      setDefaultAi(value);
+    } else if (key === 'linkStyle') {
+      setLinkStyle(value);
+    }
+
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+      chrome.storage.local.get(['settings'], (res) => {
+        const currentSettings = res.settings || {};
+        const updatedSettings = {
+          ...currentSettings,
+          [key === 'defaultAi' ? 'defaultAiExport' : 'linkStyle']: value
+        };
+        chrome.storage.local.set({ settings: updatedSettings }, () => {
+          showToast('✓ Settings updated.');
+        });
+      });
+    } else {
+      showToast('✓ Settings updated.');
+    }
+  };
+
   const saveToHistory = (newTitle: string, newUrl: string, md: string) => {
     if (typeof chrome !== 'undefined' && chrome.storage) {
       chrome.storage.local.get(['history'], (res) => {
         const currentHistory: HistoryItem[] = res.history || [];
-        
+
         // Remove existing item with same URL to avoid duplicate lists
         const filteredHistory = currentHistory.filter(item => item.url !== newUrl);
-        
+
         const newItem: HistoryItem = {
           id: Date.now().toString(),
           title: newTitle,
@@ -84,10 +123,10 @@ const App: React.FC = () => {
           markdown: md,
           timestamp: Date.now()
         };
-        
+
         // Add to the front of list, limit to 10 items
         const updatedHistory = [newItem, ...filteredHistory].slice(0, 10);
-        
+
         chrome.storage.local.set({ history: updatedHistory }, () => {
           setHistoryList(updatedHistory);
         });
@@ -125,26 +164,26 @@ const App: React.FC = () => {
 
   const handleApplyCapturedSelection = () => {
     if (!capturedSelection) return;
-    
+
     setLoading(true);
     setError(null);
-    
+
     try {
       const parsed = parseHtml(capturedSelection.html, capturedSelection.url);
       if (parsed) {
-        const md = htmlToMarkdown(parsed.content);
-        
+        const md = htmlToMarkdown(parsed.content, linkStyle as 'inlined' | 'referenced');
+
         setTitle(capturedSelection.title + ' (Selected)');
         setUrl(capturedSelection.url);
         setMarkdown(md);
-        
+
         // Save to local history
         saveToHistory(capturedSelection.title + ' (Selected)', capturedSelection.url, md);
-        
+
         showToast('✓ Custom selection loaded!');
       } else {
         // Fallback: try converting direct html to markdown without readability
-        const md = htmlToMarkdown(capturedSelection.html);
+        const md = htmlToMarkdown(capturedSelection.html, linkStyle as 'inlined' | 'referenced');
         setTitle(capturedSelection.title + ' (Selected)');
         setUrl(capturedSelection.url);
         setMarkdown(md);
@@ -191,7 +230,7 @@ const App: React.FC = () => {
       }
 
       const tabUrl = tab.url || '';
-      
+
       // Prevent running on browser system pages
       if (tabUrl.startsWith('chrome://') || tabUrl.startsWith('edge://') || tabUrl.startsWith('about:') || tabUrl.startsWith('chrome-extension://')) {
         setError('dot-md cannot extract content from browser system pages. Open a blog post, article, or documentation page and try again!');
@@ -223,22 +262,22 @@ const App: React.FC = () => {
 
       if (response && response.html) {
         const { html, title: pageTitle, url: pageUrl } = response;
-        
+
         // Parse using Readability
         const parsed = parseHtml(html, pageUrl);
         if (parsed && parsed.content) {
           // Convert to markdown
-          const md = htmlToMarkdown(parsed.content);
-          
+          const md = htmlToMarkdown(parsed.content, linkStyle as 'inlined' | 'referenced');
+
           setTitle(parsed.title || pageTitle || 'Untitled');
           setUrl(pageUrl);
           setMarkdown(md);
-          
+
           // Save to local history
           saveToHistory(parsed.title || pageTitle || 'Untitled', pageUrl, md);
         } else {
           // Fallback to basic html extraction if readability fails
-          const md = htmlToMarkdown(html);
+          const md = htmlToMarkdown(html, linkStyle as 'inlined' | 'referenced');
           setTitle(pageTitle || 'Untitled');
           setUrl(pageUrl);
           setMarkdown(md);
@@ -303,19 +342,19 @@ const App: React.FC = () => {
           dot-md
         </div>
         <div className="tabs">
-          <button 
+          <button
             className={`tab-btn ${activeTab === 'preview' ? 'active' : ''}`}
             onClick={() => setActiveTab('preview')}
           >
             Preview
           </button>
-          <button 
+          <button
             className={`tab-btn ${activeTab === 'history' ? 'active' : ''}`}
             onClick={() => setActiveTab('history')}
           >
             History
           </button>
-          <button 
+          <button
             className={`tab-btn ${activeTab === 'settings' ? 'active' : ''}`}
             onClick={() => setActiveTab('settings')}
           >
@@ -404,8 +443,8 @@ const App: React.FC = () => {
                       </div>
                     </div>
                     <div className="history-actions">
-                      <button 
-                        className="btn-history-action delete" 
+                      <button
+                        className="btn-history-action delete"
                         onClick={(e) => deleteHistoryItem(item.id, e)}
                         title="Delete from history"
                       >
@@ -427,23 +466,78 @@ const App: React.FC = () => {
             </h3>
             <div className="settings-list">
               <div className="settings-group">
-                <div className="settings-label">Extension Info</div>
-                <div className="settings-desc">Version 1.0.0 • Manifest V3 • Works offline</div>
-                <div className="settings-desc" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <Globe size={12} /> Privacy first: all parsing happens locally.
+                <div className="settings-label">Preferences</div>
+                <div className="settings-desc">Choose your default configurations.</div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '6px' }}>
+                  <div>
+                    <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '3px' }}>Default AI Model Prompt</label>
+                    <select
+                      className="select-premium"
+                      value={defaultAi}
+                      onChange={(e) => handleSettingsChange('defaultAi', e.target.value)}
+                    >
+                      <option value="chatgpt">ChatGPT (Default)</option>
+                      <option value="claude">Claude</option>
+                      <option value="gemini">Gemini</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '3px' }}>Markdown Link Style</label>
+                    <select
+                      className="select-premium"
+                      value={linkStyle}
+                      onChange={(e) => handleSettingsChange('linkStyle', e.target.value)}
+                    >
+                      <option value="inlined">Inline Links [Name](url)</option>
+                      <option value="referenced">Reference Links [Name][id]</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="settings-group">
+                <div className="settings-label">🔐 Privacy Guarantee</div>
+                <div className="settings-desc" style={{ lineHeight: '1.4', marginBottom: '4px' }}>
+                  dot-md processes 100% of your webpage content locally inside your Google Chrome browser.
+                </div>
+                <div className="settings-desc" style={{ lineHeight: '1.4' }}>
+                  We do not send your data to remote servers, make external API calls, or track/collect your browsing history. Your contents remain completely private and secure.
+                </div>
+                <div className="settings-desc" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '6px' }}>
+                  Version 1.0.0 • Manifest V3 • Works Offline
                 </div>
               </div>
 
               <div className="settings-group">
                 <div className="settings-label">Local Database</div>
                 <div className="settings-desc">Clear your locally cached conversion history.</div>
-                <button 
-                  className="btn-primary" 
-                  onClick={clearHistory} 
-                  style={{ background: 'transparent', border: '1px solid var(--danger)', color: 'var(--danger)', boxShadow: 'none' }}
+                <button
+                  className="btn-primary"
+                  onClick={clearHistory}
+                  style={{ background: 'transparent', border: '1px solid var(--danger)', color: 'var(--danger)', boxShadow: 'none', marginTop: '6px' }}
                 >
                   Clear History List
                 </button>
+              </div>
+
+              <div className="settings-group" style={{ borderBottom: 'none', paddingBottom: '0' }}>
+                <div className="settings-label">Developer Credits</div>
+                <div className="settings-desc" style={{ lineHeight: '1.4', marginBottom: '4px' }}>
+                  Developed by{' '}
+                  <a
+                    href="https://www.fahimahammed.me"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}
+                  >
+                    Fahim ahammed firoz
+                  </a>
+                </div>
+                <div className="settings-desc">
+                  Portfolio: <a href="https://www.fahimahammed.me" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', textDecoration: 'underline' }}>fahimahammed.me</a>
+                </div>
               </div>
             </div>
           </div>
