@@ -1,0 +1,30 @@
+{
+  "name": "dot-md",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node build.js",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "lucide-react": "^0.395.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "turndown": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.2",
+    "@types/chrome": "^0.0.268",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/turndown": "^5.0.4",
+    "@vitejs/plugin-react": "^4.3.1",
+    "archiver": "^7.0.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1"
+  }
+}
