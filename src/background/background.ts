@@ -2,12 +2,20 @@
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('dot-md Chrome Extension installed.');
-  // Initialize default options in storage if needed
-  chrome.storage.local.set({
-    history: [],
-    settings: {
-      defaultAiExport: 'chatgpt',
-      theme: 'dark'
+  // Initialize default options in storage only if they do not exist to avoid overwriting user preferences on update
+  chrome.storage.local.get(['history', 'settings'], (result) => {
+    const updates: Record<string, any> = {};
+    if (!result.history) {
+      updates.history = [];
+    }
+    if (!result.settings) {
+      updates.settings = {
+        defaultAiExport: 'chatgpt',
+        theme: 'dark'
+      };
+    }
+    if (Object.keys(updates).length > 0) {
+      chrome.storage.local.set(updates);
     }
   });
 });
