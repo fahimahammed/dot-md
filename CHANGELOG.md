@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.2.1...dot-md-v1.2.2) (2026-06-18)
+
+
+### Bug Fixes
+
+* refine token warning threshold alert message ([3f0b4cf](https://github.com/fahimahammed/dot-md/commit/3f0b4cf483f9aa7379d72c6a216ba0099ba58fb1))
+
 ## [1.2.1](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.2.0...dot-md-v1.2.1) (2026-06-18)
 
 
