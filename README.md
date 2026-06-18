@@ -1,4 +1,4 @@
-# <align align="center">📘 dot-md — Web to Clean Markdown</align>
+# dot-md — Web to Clean Markdown
 
 <p align="center">
   <strong>Convert any webpage into clean, well-formatted, LLM-ready Markdown instantly.</strong>
@@ -6,7 +6,10 @@
 
 <p align="center">
   <a href="https://github.com/fahimahammed/dot-md/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/fahimahammed/dot-md/release-please.yml?branch=main&style=for-the-badge&logo=github&logoColor=white" alt="Build Status" />
+    <img src="https://img.shields.io/github/actions/workflow/status/fahimahammed/dot-md/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=white" alt="Build Status" />
+  </a>
+  <a href="https://github.com/fahimahammed/dot-md/releases">
+    <img src="https://img.shields.io/github/v/release/fahimahammed/dot-md?style=for-the-badge&color=8A2BE2" alt="Version" />
   </a>
   <a href="LICENSE">
     <img src="https://img.shields.io/github/license/fahimahammed/dot-md?style=for-the-badge&logo=mit&logoColor=white&color=8A2BE2" alt="MIT License" />
@@ -21,7 +24,7 @@
 
 ---
 
-## 🌟 Summary
+## Summary
 
 **dot-md** is a premium, developer-first Chrome Extension (built with Manifest V3, React, and TypeScript) designed to instantly scrape and convert cluttered webpages into clean, structured Markdown. 
 
@@ -32,19 +35,19 @@ Whether you are preparing article content for LLMs (ChatGPT, Claude, Gemini), ar
 
 ---
 
-## ✨ Features
+## Features
 
-- 📄 **Full Page Extraction:** One-click conversion of articles, blogs, and documentation pages, using Mozilla's `@mozilla/readability` to isolate the core content.
-- 🎯 **Custom Selection Mode:** Focus on specific page segments. Click any page element with an interactive DOM inspector overlay to extract only that section.
-- 📖 **Immersive Reader Mode:** Read distraction-free in a beautiful fullscreen modal isolated inside a browser Shadow DOM. Toggle between **Light**, **Sepia**, and **Dark** themes, and scale typography dynamically.
-- 🤖 **AI-Optimized Exporter:** Instantly copy formatted templates ready for LLM prompt context, complete with page metadata (Title, Source URL, and Content).
-- 📊 **Token & Word Calculator:** Live calculations of words and LLM tokens. Displays warning overlays when context length exceeds 15,000 tokens to help manage prompt budgets.
-- 🕒 **Local Session History:** A slide-out History panel storing your last 10 processed pages for fast offline reuse, retrieval, and re-export.
-- 🎨 **Premium UI/UX:** Sleek glassmorphic panel design, responsive micro-animations, customizable dark theme, and fluid transitions.
+- **Full Page Extraction:** One-click conversion of articles, blogs, and documentation pages, using Mozilla's `@mozilla/readability` to isolate the core content.
+- **Custom Selection Mode:** Focus on specific page segments. Click any page element with an interactive DOM inspector overlay to extract only that section.
+- **Immersive Reader Mode:** Read distraction-free in a beautiful fullscreen modal isolated inside a browser Shadow DOM. Toggle between Light, Sepia, and Dark themes, and scale typography dynamically.
+- **AI-Optimized Exporter:** Instantly copy formatted templates ready for LLM prompt context, complete with page metadata (Title, Source URL, and Content).
+- **Token & Word Calculator:** Live calculations of words and LLM tokens. Displays warning overlays when context length exceeds 15,000 tokens to help manage prompt budgets.
+- **Local Session History:** A slide-out History panel storing your last 10 processed pages for fast offline reuse, retrieval, and re-export.
+- **Premium UI/UX:** Sleek glassmorphic panel design, responsive micro-animations, customizable dark theme, and fluid transitions.
 
 ---
 
-## 🛠️ Installation Guide
+## Installation Guide
 
 Follow these steps to build and load the extension locally in your Google Chrome browser:
 
@@ -72,13 +75,13 @@ Follow these steps to build and load the extension locally in your Google Chrome
 
 ---
 
-## 💻 Development Installation Guide
+## Development Installation Guide
 
 Follow these steps to set up the project locally for development or customization.
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
-- [npm](https://www.npmjs.com/) (v9.0.0 or higher)
+- Node.js (v18.0.0 or higher recommended)
+- npm (v9.0.0 or higher)
 
 ### 1. Clone & Install Dependencies
 ```bash
@@ -104,18 +107,18 @@ Running `npm run build` triggers `node build.js`. This custom build script:
 
 ---
 
-## 🧪 Testing Procedures
+## Testing Procedures
 
 To verify everything operates correctly:
 
-1. **Full Extraction:** Open an article or document on [dev.to](https://dev.to) or Wikipedia, click the extension icon, and verify the Markdown preview matches the content.
+1. **Full Extraction:** Open an article or document on dev.to or Wikipedia, click the extension icon, and verify the Markdown preview matches the content.
 2. **Selection Mode:** Click the selector cursor icon in the popup. Move your cursor on the host webpage to see dashed hover highlights, select a container, and click **Load Selected** inside the popup's top banner alert.
 3. **Reader Mode:** Open the reading viewer (book icon). Change text themes and sizes, then verify it closes gracefully.
 4. **LLM Copying:** Click the **Export** dropdown and copy to Claude/ChatGPT format. Verify page metadata is included.
 
 ---
 
-## 🏗️ Project Architecture
+## Project Architecture
 
 ```txt
 dot-md/
@@ -133,7 +136,7 @@ dot-md/
 
 ---
 
-## 🔒 Privacy & Local Processing
+## Privacy and Local Processing
 
 **dot-md** respect user privacy.
 - **No Remote Calls:** No remote APIs, analytics endpoints, or database endpoints are queried.
@@ -142,7 +145,7 @@ dot-md/
 
 ---
 
-## 📄 MIT License
+## License
 
 This project is licensed under the terms of the MIT License. You are free to modify, distribute, and build upon this project for both personal and commercial applications. For full terms, refer to the [LICENSE](LICENSE) file.
 
