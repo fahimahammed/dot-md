@@ -1,6 +1,10 @@
 <h1 align="center">dot-md - Web to Clean Markdown</h1>
 
 <p align="center">
+  <img src="public/cover.png" alt="dot-md Cover Banner" width="600" />
+</p>
+
+<p align="center">
   <strong>Convert any webpage into clean, well-formatted, LLM-ready Markdown instantly.</strong>
 </p>
 
@@ -14,6 +18,12 @@
   <a href="LICENSE">
     <img src="https://img.shields.io/github/license/fahimahammed/dot-md?style=flat-square&logo=git&logoColor=white&color=475569" alt="MIT License" />
   </a>
+</p>
+
+<p align="center">
+  <a href="LICENSE">License</a> •
+  <a href="PRIVACY.md">Privacy Policy</a> •
+  <a href="SECURITY.md">Security Policy</a>
 </p>
 
 ---
