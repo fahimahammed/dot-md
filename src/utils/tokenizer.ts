@@ -42,7 +42,7 @@ export function estimateTokens(text: string): number {
 export function getTokenWarning(tokenCount: number): string | null {
   const WARNING_THRESHOLD = 15000;
   if (tokenCount > WARNING_THRESHOLD) {
-    return `⚠️ Large content (${tokenCount.toLocaleString()} tokens). This might consume a large portion of your LLM's context window.`;
+    return `⚠️ Large page content (${tokenCount.toLocaleString()} tokens). This may consume a significant portion of your LLM's context window.`;
   }
   return null;
 }
