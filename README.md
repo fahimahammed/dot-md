@@ -1,94 +1,151 @@
-# 📘 dot-md Chrome Extension
+# <align align="center">📘 dot-md — Web to Clean Markdown</align>
 
-**dot-md** হলো একটি প্রিমিয়াম ক্রোম এক্সটেনশন (Manifest V3) যা যেকোনো ওয়েবপেজ থেকে অপ্রয়োজনীয় এলিমেন্ট (বিজ্ঞাপন, মেনু, ফুটার) বাদ দিয়ে মূল কন্টেন্টকে পরিষ্কার ও স্ট্রাকচার্ড Markdown ফরম্যাটে রূপান্তর করে। 
+<p align="center">
+  <strong>Convert any webpage into clean, well-formatted, LLM-ready Markdown instantly.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/fahimahammed/dot-md/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/fahimahammed/dot-md/release-please.yml?branch=main&style=for-the-badge&logo=github&logoColor=white" alt="Build Status" />
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license/fahimahammed/dot-md?style=for-the-badge&logo=mit&logoColor=white&color=8A2BE2" alt="MIT License" />
+  </a>
+  <a href="https://github.com/fahimahammed/dot-md/stargazers">
+    <img src="https://img.shields.io/github/stars/fahimahammed/dot-md?style=for-the-badge&logo=github&logoColor=white&color=8A2BE2" alt="GitHub Stars" />
+  </a>
+  <a href="https://github.com/fahimahammed/dot-md/issues">
+    <img src="https://img.shields.io/github/issues/fahimahammed/dot-md?style=for-the-badge&logo=github&logoColor=white&color=8A2BE2" alt="GitHub Issues" />
+  </a>
+</p>
 
 ---
 
-## 🇧🇩 বাংলা নির্দেশিকা (Bangla Guide)
+## 🌟 Summary
 
-এই ডকুমেন্টেশনে এক্সটেনশনটি লোকালি টেস্ট করা, বিল্ড করা এবং ক্রোম ওয়েব স্টোরে পাবলিশ করার সম্পূর্ণ নিয়ম আলোচনা করা হয়েছে।
+**dot-md** is a premium, developer-first Chrome Extension (built with Manifest V3, React, and TypeScript) designed to instantly scrape and convert cluttered webpages into clean, structured Markdown. 
 
-### 🛠️ ডেভ মোডে রান ও টেস্ট করার নিয়ম (How to run and test in Dev Mode)
+Whether you are preparing article content for LLMs (ChatGPT, Claude, Gemini), archiving research, or formatting technical documentation, **dot-md** removes cookie banners, advertisements, navigation bars, and footers, delivering only the core text and images you need.
 
-লোকাল কম্পিউটারে এক্সটেনশনটি সেটআপ ও রান করার জন্য নিচের ধাপগুলো অনুসরণ করুন:
+> [!IMPORTANT]
+> **100% Privacy-First & Offline:** All HTML scraping, readability processing, and Markdown generation occur entirely in your local browser environment. No telemetry, no external trackers, and no server roundtrips.
 
-#### ১. ডিপেন্ডেন্সি ইনস্টল করা:
-প্রজেক্টের রুট ডিরেক্টরিতে টার্মিনাল ওপেন করে নিচের কমান্ডটি চালান:
+---
+
+## ✨ Features
+
+- 📄 **Full Page Extraction:** One-click conversion of articles, blogs, and documentation pages, using Mozilla's `@mozilla/readability` to isolate the core content.
+- 🎯 **Custom Selection Mode:** Focus on specific page segments. Click any page element with an interactive DOM inspector overlay to extract only that section.
+- 📖 **Immersive Reader Mode:** Read distraction-free in a beautiful fullscreen modal isolated inside a browser Shadow DOM. Toggle between **Light**, **Sepia**, and **Dark** themes, and scale typography dynamically.
+- 🤖 **AI-Optimized Exporter:** Instantly copy formatted templates ready for LLM prompt context, complete with page metadata (Title, Source URL, and Content).
+- 📊 **Token & Word Calculator:** Live calculations of words and LLM tokens. Displays warning overlays when context length exceeds 15,000 tokens to help manage prompt budgets.
+- 🕒 **Local Session History:** A slide-out History panel storing your last 10 processed pages for fast offline reuse, retrieval, and re-export.
+- 🎨 **Premium UI/UX:** Sleek glassmorphic panel design, responsive micro-animations, customizable dark theme, and fluid transitions.
+
+---
+
+## 🛠️ Installation Guide
+
+Follow these steps to build and load the extension locally in your Google Chrome browser:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/fahimahammed/dot-md.git
+   cd dot-md
+   ```
+
+2. **Install Dependencies & Build the Project:**
+   ```bash
+   npm install
+   npm run build
+   ```
+   *This will compile the extension assets and generate a **`dist`** folder in the root directory.*
+
+3. **Load the Extension in Google Chrome:**
+   * Open your Chrome browser and type **`chrome://extensions/`** in the URL search bar.
+   * Turn on **Developer mode** using the toggle switch located in the top-right corner of the page.
+   * Click the **Load unpacked** button in the top-left corner.
+   * Navigate to and select the **`dist`** folder inside your cloned `dot-md` project directory.
+
+4. **Verify Installation:**
+   * The **dot-md** extension icon will now appear in your extension toolbar. Pin it for quick access, then navigate to any article and click the icon to begin converting!
+
+---
+
+## 💻 Development Installation Guide
+
+Follow these steps to set up the project locally for development or customization.
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
+- [npm](https://www.npmjs.com/) (v9.0.0 or higher)
+
+### 1. Clone & Install Dependencies
 ```bash
+git clone https://github.com/fahimahammed/dot-md.git
+cd dot-md
 npm install
 ```
 
-#### ২. প্রোডাকশন বিল্ড তৈরি করা:
-এক্সটেনশনটি ক্রোমে লোড করার জন্য প্রথমে এটিকে বিল্ড করতে হবে। নিচের কমান্ডটি রান করুন:
-```bash
-npm run build
+### 2. Available NPM Scripts
+Run these commands from the root directory of the project:
+
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Runs the Vite dev server locally for interface/popup prototyping. |
+| `npm run build` | Compiles files, bundles assets into `dist/`, and archives the output as `dist.zip`. |
+| `npm run tsc` | Validates TypeScript configuration and checks for type safety compile issues. |
+
+### 3. Understanding the Build System
+Running `npm run build` triggers `node build.js`. This custom build script:
+- Compiles the React UI popup, content scripts, and background service workers via Vite.
+- Copies extension icons, configuration manifests, and assets to the output `/dist` folder.
+- Compresses the contents of the `/dist` directory into **`dist.zip`** in the repository root directory. This ZIP archive is ready for upload to the Chrome Web Store Developer Console.
+
+---
+
+## 🧪 Testing Procedures
+
+To verify everything operates correctly:
+
+1. **Full Extraction:** Open an article or document on [dev.to](https://dev.to) or Wikipedia, click the extension icon, and verify the Markdown preview matches the content.
+2. **Selection Mode:** Click the selector cursor icon in the popup. Move your cursor on the host webpage to see dashed hover highlights, select a container, and click **Load Selected** inside the popup's top banner alert.
+3. **Reader Mode:** Open the reading viewer (book icon). Change text themes and sizes, then verify it closes gracefully.
+4. **LLM Copying:** Click the **Export** dropdown and copy to Claude/ChatGPT format. Verify page metadata is included.
+
+---
+
+## 🏗️ Project Architecture
+
+```txt
+dot-md/
+├── src/
+│   ├── background/      # Chrome background service workers
+│   ├── content/         # Page DOM selectors, highlighter overlay & reader mode component
+│   ├── popup/           # React popup panel, Markdown previews, export utilities & history
+│   ├── utils/           # Scrapers, readability parsing & turndown conversion logic
+│   └── manifest.json    # Chrome Extension Manifest V3 configuration
+├── public/              # Static icons and image assets
+├── build.js             # Automated compilation and ZIP packaging script
+├── vite.config.ts       # Vite configuration file
+└── tsconfig.json        # TypeScript configuration file
 ```
-এটি সফলভাবে প্রজেক্টটি কম্পাইল করে একটি `dist/` ফোল্ডার এবং ক্রোম ওয়েব স্টোরে আপলোডের জন্য `dist.zip` ফাইল তৈরি করবে।
-
-#### ৩. গুগল ক্রোমে এক্সটেনশনটি লোড করা:
-* গুগল ক্রোম ব্রাউজারটি ওপেন করুন এবং এড্রেস বারে যান: `chrome://extensions/`
-* ডানদিকের উপরের কোণায় থাকা **Developer mode** অপশনটি অন করুন।
-* বামদিকের উপরে থাকা **Load unpacked** বাটনে ক্লিক করুন।
-* আপনার প্রজেক্ট ডিরেক্টরি থেকে **`dist`** ফোল্ডারটি সিলেক্ট করুন।
-* এখন আপনার ব্রাউজারের এক্সটেনশন মেনুতে **dot-md** আইকনটি দেখতে পাবেন।
 
 ---
 
-### 🧪 টেস্ট করার নিয়ম (Testing Guide)
+## 🔒 Privacy & Local Processing
 
-এক্সটেনশনের ফিচারগুলো সঠিকভাবে কাজ করছে কিনা তা পরীক্ষা করতে নিচের টেস্টগুলো করুন:
-
-#### ১. ফুল পেজ এক্সট্রাকশন টেস্ট (Full Page Extraction Test):
-* যেকোনো একটি আর্টিকেল বা ব্লগ সাইটে যান (যেমন: Dev.to, Medium, বা Wikipedia)।
-* এক্সটেনশনের আইকনটিতে ক্লিক করুন। এটি স্বয়ংক্রিয়ভাবে পেজের মূল লেখাটি রিডাবিলিটি দিয়ে স্ক্র্যাপ করে সুন্দর একটি ডার্ক থিমড প্যানেলে Markdown প্রিভিউ দেখাবে।
-
-#### ২. সিলেকশন মোড টেস্ট (Selection Mode Test):
-* প্যানেলের নিচে থাকা মাউস পয়েন্টার আইকনটিতে (**Selection Mode**) ক্লিক করুন। প্যানেলটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে এবং পেজে একটি ভিজ্যুয়াল সিলেক্টর অন হবে।
-* পেজের যেকোনো সেকশনের ওপর মাউস হভার করলে একটি ড্যাশড বেগুনি বর্ডার দেখা যাবে।
-* যেকোনো একটি নির্দিষ্ট প্যারাগ্রাফ বা ডিভে ক্লিক করুন। পেজের নিচে একটি টোস্ট নোটিফিকেশন আসবে।
-* আবার এক্সটেনশন আইকনে ক্লিক করলে প্যানেলের উপরে **"Captured selection from..."** ব্যানার দেখা যাবে। **Load Selected** বাটনে ক্লিক করলে শুধু সিলেক্ট করা অংশটির Markdown প্রিভিউ লোড হবে।
-* সিলেকশন মোড চলাকালীন ক্যানসেল করতে কিবোর্ডের `Escape` চাপুন।
-
-#### ৩. রিডার মোড টেস্ট (Clean Reader Mode Test):
-* প্যানেলে থাকা বইয়ের আইকনটিতে (**BookOpen**) ক্লিক করুন। 
-* এটি ওয়েবপেজের ওপরে একটি সুন্দর বিজ্ঞাপনহীন ফুলস্ক্রিন রিডার ভিউ চালু করবে।
-* সেখানে আপনি Light, Sepia, এবং Dark থিম পরিবর্তন করতে পারবেন এবং ফন্টের সাইজ ছোট-বড় (A-, A+) করতে পারবেন।
-* রিডার ভিউ বন্ধ করতে **✕ Close** বাটনে ক্লিক করুন।
-
-#### ৪. এআই এক্সপোর্ট এবং ডাউনলোড টেস্ট (AI Export & Download Test):
-* প্রিভিউ স্ক্রিনের ডানদিকের কোণায় থাকা **Export** ড্রপডাউনে ক্লিক করে ChatGPT, Claude, বা Gemini-এর জন্য প্রম্পট সহ রেডিমেড Markdown কপি করতে পারবেন।
-* ডাউনলোড বাটনে ক্লিক করলে পেজের টাইটেল অনুযায়ী `.md` ফাইলটি ডিরেক্টলি ডাউনলোড হবে।
-* **History** ট্যাবে গেলে আপনার শেষ ১০টি কনভার্ট করা পেজের হিস্ট্রি দেখতে পাবেন।
+**dot-md** respect user privacy.
+- **No Remote Calls:** No remote APIs, analytics endpoints, or database endpoints are queried.
+- **100% Offline:** Conversion and processing functions are completely offline.
+- **Data Persistence:** Settings preferences and conversion histories are saved exclusively in Chrome's local storage (`chrome.storage.local`) and never leave your machine.
 
 ---
 
-### 🚀 ক্রোম ওয়েব স্টোরে পাবলিশ করার নিয়ম (How to Publish to Chrome Web Store)
+## 📄 MIT License
 
-আপনার এক্সটেনশনটি পাবলিশ করার জন্য সম্পূর্ণ রেডি করা হয়েছে। পাবলিশ করার ধাপগুলো নিচে দেওয়া হলো:
+This project is licensed under the terms of the MIT License. You are free to modify, distribute, and build upon this project for both personal and commercial applications. For full terms, refer to the [LICENSE](LICENSE) file.
 
-1. **প্যাকেজিং**: `npm run build` কমান্ডটি রান করার সাথে সাথে প্রজেক্টের রুট ডিরেক্টরিতে একটি **`dist.zip`** ফাইল তৈরি হবে। এটিই আপনার পাবলিশিং প্যাকেজ।
-2. **ডেভেলপার কনসোল**: [Google Chrome Web Store Developer Console](https://developer.chrome.com/docs/webstore/publish/)-এ যান।
-3. **নিবন্ধন**: আপনার গুগল অ্যাকাউন্ট দিয়ে ডেভেলপার হিসেবে সাইন-আপ করুন (এটির জন্য গুগল ১ বারের জন্য $5 ফি নিয়ে থাকে)।
-4. **আইটেম যোগ করুন**: কনসোলে **Add new item** বাটনে ক্লিক করুন এবং প্রজেক্টে তৈরি হওয়া **`dist.zip`** ফাইলটি ড্র্যাগ অ্যান্ড ড্রপ করে আপলোড করুন।
-5. **বিবরণ ও আইকন**: প্রজেক্টের আইকনগুলো ইতিমধ্যে `dist/icons/` ফোল্ডারে যোগ করা আছে। এক্সটেনশনের নাম, ডেসক্রিপশন এবং ক্যাটাগরি সেট করুন।
-6. **গোপনীয়তা নীতি (Privacy Policy)**: স্টোর ফরমে উল্লেখ করুন যে এই এক্সটেনশনটি কোনো প্রকার রিমোট ডাটা কালেকশন করে না। সকল পার্সিং ও কনভার্সন লোকালি ইউজারের ব্রাউজারেই প্রসেস করা হয় (১০০% অফলাইন ও প্রাইভেসি ফ্রেন্ডলি)।
-7. **সাবমিট**: সবকিছু রিভিউ করে **Submit for Review** বাটনে ক্লিক করুন। গুগল টিম এটি পরীক্ষা করে ২-৩ দিনের মধ্যে ক্রোম ওয়েব স্টোরে লাইভ করে দেবে।
-
----
-
-## 🇺🇸 English Reference Guide
-
-### Commands Quick Start
-* **Install dependencies**: `npm install`
-* **Generate production bundle and zip archive**: `npm run build`
-* **Check TypeScript compilation**: `npm run tsc`
-
-### Chrome Extension Manual Load:
-1. Open Google Chrome and go to `chrome://extensions/`.
-2. Toggle **Developer mode** in the top-right.
-3. Click **Load unpacked** in the top-left and select the **`dist`** directory from this project.
-4. Open any article and launch the extension to test!
-
-### Web Store Upload:
-* Upload the generated **`dist.zip`** file in the Google Developer Console.
-# dot-md
+```
+Copyright (c) 2026 Fahim Ahammed Firoz
+```
