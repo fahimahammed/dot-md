@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.1.0...dot-md-v1.2.0) (2026-06-18)
+
+
+### Features
+
+* add automated release asset uploads and rename build archive to dot-md.zip ([dd90bbe](https://github.com/fahimahammed/dot-md/commit/dd90bbe3034567835c4bbc9e3ce3fbcd304791e1))
+
 ## [1.1.0](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.0.0...dot-md-v1.1.0) (2026-06-18)
 
 
