@@ -1,4 +1,4 @@
-name: Release Please
+name: release-please
 
 on:
   push:
@@ -9,10 +9,18 @@ permissions:
   contents: write
   pull-requests: write
 
+# cancel any previous runs in progress for the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - name: Run Release Please
+        id: release
+        uses: googleapis/release-please-action@v4
         with:
-          release-type: node
+          config-file: .release-please-config.json
+          manifest-file: .release-please-manifest.json
