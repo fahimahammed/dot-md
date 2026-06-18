@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "dot-md",
   "short_name": "dot-md",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Convert any webpage into clean Markdown",
   "author": "Fahim Ahammed Firoz <fahimahammed.cse@gmail.com>",
   "homepage_url": "https://github.com/fahimahammed/dot-md",
