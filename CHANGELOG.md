@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.2.0...dot-md-v1.2.1) (2026-06-18)
+
+
+### Bug Fixes
+
+* prevent overwriting settings and history on update ([3e972f1](https://github.com/fahimahammed/dot-md/commit/3e972f1f8b97037830d6cad5d97233ed35d1587a))
+
 ## [1.2.0](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.1.0...dot-md-v1.2.0) (2026-06-18)
 
 
