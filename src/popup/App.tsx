@@ -330,6 +330,18 @@ const App: React.FC = () => {
     }
   };
 
+  const getVersionInfo = () => {
+    if (typeof chrome !== 'undefined' && chrome.runtime && typeof chrome.runtime.getManifest === 'function') {
+      try {
+        const manifest = chrome.runtime.getManifest();
+        return `Version ${manifest.version || '1.2.2'} • Manifest V${manifest.manifest_version || 3} • Works Offline`;
+      } catch (e) {
+        console.error('Error loading manifest version:', e);
+      }
+    }
+    return 'Version 1.2.2 • Manifest V3 • Works Offline';
+  };
+
   return (
     <div className="app-container">
       {/* Toast Alert Banner */}
@@ -506,7 +518,7 @@ const App: React.FC = () => {
                   We do not send your data to remote servers, make external API calls, or track/collect your browsing history. Your contents remain completely private and secure.
                 </div>
                 <div className="settings-desc" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '6px' }}>
-                  Version 1.0.0 • Manifest V3 • Works Offline
+                  {getVersionInfo()}
                 </div>
               </div>
 
