@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.2.2...dot-md-v1.3.0) (2026-06-18)
+
+
+### Features
+
+* dynamically fetch and display extension version and manifest info in settings footer ([0a21977](https://github.com/fahimahammed/dot-md/commit/0a21977aa37d753b1beb8b48f40c0e52fe959964))
+
 ## [1.2.2](https://github.com/fahimahammed/dot-md/compare/dot-md-v1.2.1...dot-md-v1.2.2) (2026-06-18)
 
 

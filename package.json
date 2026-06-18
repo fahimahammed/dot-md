@@ -1,6 +1,6 @@
 {
   "name": "dot-md",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Convert any webpage into clean, well-formatted, LLM-ready Markdown",
   "author": "Fahim Ahammed Firoz <fahimahammed.cse@gmail.com>",
   "license": "MIT",
