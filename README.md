@@ -1,4 +1,4 @@
-<h1 align="center">dot-md - Web to Clean Markdown</h1>
+<h1 align="center">dot-md - Web to Clean Markdown</h1> 
 
 <p align="center">
   <img src="public/cover.png" alt="dot-md Cover Banner" width="600" />
