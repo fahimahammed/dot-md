@@ -21,6 +21,12 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/fahimahammed/dot-md/releases/latest/download/dot-md.zip" style="font-weight: bold; font-size: 1.1em;">
+    📥 Download Pre-built Extension (dot-md.zip)
+  </a>
+</p>
+
+<p align="center">
   <a href="LICENSE">License</a> •
   <a href="PRIVACY.md">Privacy Policy</a> •
   <a href="SECURITY.md">Security Policy</a>
@@ -53,29 +59,38 @@ Whether you are preparing article content for LLMs (ChatGPT, Claude, Gemini), ar
 
 ## Installation Guide
 
-Follow these steps to build and load the extension locally in your Google Chrome browser:
+Follow these steps to download, build, and load the extension in your Google Chrome browser:
 
-1. **Clone the Repository:**
+### Option 1: Direct Download (Easiest & Recommended for Users)
+1. **Download the Extension:** Click the **[📥 Download Pre-built dot-md.zip](https://github.com/fahimahammed/dot-md/releases/latest/download/dot-md.zip)** link at the top of this page (or navigate to the **Releases** tab on the right side of GitHub and download the `dot-md.zip` file under the latest release assets).
+2. **Extract the ZIP Archive:** Locate the downloaded `dot-md.zip` file on your computer and extract (unzip) its contents into a folder (e.g., name the folder `dot-md`).
+3. **Load into Google Chrome:** Proceed to the **[Loading into Google Chrome](#loading-into-google-chrome)** instructions below.
+
+### Option 2: Build from Source (For Developers)
+1. **Clone the Repository:** Open your terminal and run:
    ```bash
    git clone https://github.com/fahimahammed/dot-md.git
    cd dot-md
    ```
-
-2. **Install Dependencies & Build the Project:**
+2. **Install Dependencies & Build:** Compile the React components and packaging bundles by running:
    ```bash
    npm install
    npm run build
    ```
-   *This will compile the extension assets and generate a **`dist`** folder in the root directory.*
+   *This compiles the extension assets and creates the **`dist`** directory in your project root.*
+3. **Load into Google Chrome:** Proceed to the **[Loading into Google Chrome](#loading-into-google-chrome)** instructions below and load the compiled **`dist`** folder.
 
-3. **Load the Extension in Google Chrome:**
-   * Open your Chrome browser and type **`chrome://extensions/`** in the URL search bar.
-   * Turn on **Developer mode** using the toggle switch located in the top-right corner of the page.
-   * Click the **Load unpacked** button in the top-left corner.
-   * Navigate to and select the **`dist`** folder inside your cloned `dot-md` project directory.
+---
 
-4. **Verify Installation:**
-   * The **dot-md** extension icon will now appear in your extension toolbar. Pin it for quick access, then navigate to any article and click the icon to begin converting!
+### Loading into Google Chrome
+
+Once you have prepared the folder (either from extracting the zip or building from source), follow these steps to load it into Chrome:
+
+1. **Open the Extensions Page:** Launch Google Chrome and navigate to **`chrome://extensions/`** by typing it directly in the URL address bar.
+2. **Enable Developer Mode:** Turn on the **Developer mode** toggle switch located in the top-right corner of the page.
+3. **Load the Unpacked Folder:** Click the **Load unpacked** button in the top-left corner.
+4. **Select the Folder:** Browse your computer and select the extracted folder (from Option 1) or the compiled **`dist`** folder (from Option 2). *Make sure to select the folder containing the `manifest.json` file directly.*
+5. **Pin and Use:** The **dot-md** extension icon will now appear in your browser toolbar. Click the puzzle icon (Extensions menu), find **dot-md**, and click the **Pin** icon for quick access. Open any article or webpage and launch the extension to begin converting!
 
 ---
 
@@ -100,14 +115,14 @@ Run these commands from the root directory of the project:
 | Command | Description |
 | :--- | :--- |
 | `npm run dev` | Runs the Vite dev server locally for interface/popup prototyping. |
-| `npm run build` | Compiles files, bundles assets into `dist/`, and archives the output as `dist.zip`. |
+| `npm run build` | Compiles files, bundles assets into `dist/`, and archives the output as `dot-md.zip`. |
 | `npm run tsc` | Validates TypeScript configuration and checks for type safety compile issues. |
 
 ### 3. Understanding the Build System
 Running `npm run build` triggers `node build.js`. This custom build script:
 - Compiles the React UI popup, content scripts, and background service workers via Vite.
 - Copies extension icons, configuration manifests, and assets to the output `/dist` folder.
-- Compresses the contents of the `/dist` directory into **`dist.zip`** in the repository root directory. This ZIP archive is ready for upload to the Chrome Web Store Developer Console.
+- Compresses the contents of the `/dist` directory into **`dot-md.zip`** in the repository root directory. This ZIP archive is ready for upload to the Chrome Web Store Developer Console.
 
 ---
 

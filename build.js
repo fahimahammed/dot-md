@@ -89,8 +89,8 @@ async function runBuilds() {
       process.exit(1);
     }
 
-    // 5. Package into dist.zip
-    console.log('\n🤐 Packaging dist/ into dist.zip for Chrome Web Store...');
+    // 5. Package into dot-md.zip
+    console.log('\n🤐 Packaging dist/ into dot-md.zip for Chrome Web Store...');
     await packageExtension();
     console.log('🎉 Build process completed successfully!');
 
@@ -102,7 +102,7 @@ async function runBuilds() {
 
 function packageExtension() {
   return new Promise((resolvePromise, rejectPromise) => {
-    const zipPath = resolve(__dirname, 'dist.zip');
+    const zipPath = resolve(__dirname, 'dot-md.zip');
     
     // Delete existing zip if it exists
     if (fs.existsSync(zipPath)) {
@@ -115,7 +115,7 @@ function packageExtension() {
     });
 
     output.on('close', () => {
-      console.log(`✅ dist.zip successfully created (${(archive.pointer() / 1024 / 1024).toFixed(2)} MB).`);
+      console.log(`✅ dot-md.zip successfully created (${(archive.pointer() / 1024 / 1024).toFixed(2)} MB).`);
       resolvePromise(true);
     });
 
