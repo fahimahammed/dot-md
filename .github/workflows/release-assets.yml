@@ -1,8 +1,9 @@
 name: Upload Release Assets
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'dot-md-v*'
 
 permissions:
   contents: write
