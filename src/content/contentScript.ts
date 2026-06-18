@@ -14,23 +14,22 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       url: window.location.href
     });
   }
-  
+
   else if (message.type === 'START_SELECTION') {
     startSelectionMode();
     sendResponse({ success: true });
   }
-  
+
   else if (message.type === 'TOGGLE_READER_MODE') {
     const closed = toggleReaderMode();
     sendResponse({ success: true, closed });
   }
-  
+
   return true;
 });
 
-// ==========================================
-// 🎯 1. Selection Mode Implementation
-// ==========================================
+
+// 1. Selection Mode Implementation
 
 function startSelectionMode() {
   if (isSelectionModeActive) return;
@@ -89,7 +88,7 @@ function handleMouseOver(e: MouseEvent) {
 
   selectedElement = target;
   const rect = target.getBoundingClientRect();
-  
+
   hoverOverlay.style.top = `${rect.top}px`;
   hoverOverlay.style.left = `${rect.left}px`;
   hoverOverlay.style.width = `${rect.width}px`;
@@ -136,9 +135,8 @@ function handleKeyDown(e: KeyboardEvent) {
   }
 }
 
-// ==========================================
-// 📖 2. Clean Reader Mode Implementation
-// ==========================================
+
+//  2. Clean Reader Mode Implementation
 
 let readerContainer: HTMLDivElement | null = null;
 
@@ -475,7 +473,7 @@ function toggleReaderMode(): boolean {
       const target = e.target as HTMLButtonElement;
       target.classList.add('active');
       const theme = target.dataset.theme || 'light';
-      
+
       // Update Host Class
       if (readerContainer) {
         readerContainer.className = '';
@@ -507,9 +505,9 @@ function toggleReaderMode(): boolean {
   return false; // remains open
 }
 
-// ==========================================
-// 🔔 3. Toast Helper Notification
-// ==========================================
+
+//  3. Toast Helper Notification
+
 
 function showToast(message: string, duration = 3000) {
   // Check if there is an existing toast, remove it
@@ -521,7 +519,7 @@ function showToast(message: string, duration = 3000) {
   const toast = document.createElement('div');
   toast.id = 'dot-md-toast-notice';
   toast.innerText = message;
-  
+
   // Style toast nicely
   toast.style.position = 'fixed';
   toast.style.bottom = '24px';
@@ -539,15 +537,15 @@ function showToast(message: string, duration = 3000) {
   toast.style.opacity = '0';
   toast.style.transform = 'translateY(10px)';
   toast.style.transition = 'opacity 0.25s ease-out, transform 0.25s ease-out';
-  
+
   document.body.appendChild(toast);
-  
+
   // Force reflow and animate in
   setTimeout(() => {
     toast.style.opacity = '1';
     toast.style.transform = 'translateY(0)';
   }, 10);
-  
+
   // Dismiss after duration
   setTimeout(() => {
     toast.style.opacity = '0';

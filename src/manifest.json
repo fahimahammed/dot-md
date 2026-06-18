@@ -4,7 +4,7 @@
   "short_name": "dot-md",
   "version": "1.2.0",
   "description": "Convert any webpage into clean Markdown",
-  "author": "Fahim Ahammed Firoz",
+  "author": "Fahim Ahammed Firoz <fahimahammed.cse@gmail.com>",
   "homepage_url": "https://github.com/fahimahammed/dot-md",
   "offline_enabled": true,
   "minimum_chrome_version": "88",
@@ -41,4 +41,3 @@
     "128": "icons/icon128.png"
   }
 }
-
