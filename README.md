@@ -1,4 +1,4 @@
-# dot-md — Web to Clean Markdown
+<h1 align="center">dot-md - Web to Clean Markdown</h1>
 
 <p align="center">
   <strong>Convert any webpage into clean, well-formatted, LLM-ready Markdown instantly.</strong>
@@ -6,19 +6,13 @@
 
 <p align="center">
   <a href="https://github.com/fahimahammed/dot-md/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/fahimahammed/dot-md/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=white" alt="Build Status" />
+    <img src="https://img.shields.io/github/actions/workflow/status/fahimahammed/dot-md/ci.yml?branch=main&style=flat-square&logo=github-actions&logoColor=white&color=2ea44f" alt="Build Status" />
   </a>
-  <a href="https://github.com/fahimahammed/dot-md/releases">
-    <img src="https://img.shields.io/github/v/release/fahimahammed/dot-md?style=for-the-badge&color=8A2BE2" alt="Version" />
+  <a href="https://github.com/fahimahammed/dot-md/blob/main/package.json">
+    <img src="https://img.shields.io/github/package-json/v/fahimahammed/dot-md?style=flat-square&logo=git&logoColor=white&color=7C3AED" alt="Version" />
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/fahimahammed/dot-md?style=for-the-badge&logo=mit&logoColor=white&color=8A2BE2" alt="MIT License" />
-  </a>
-  <a href="https://github.com/fahimahammed/dot-md/stargazers">
-    <img src="https://img.shields.io/github/stars/fahimahammed/dot-md?style=for-the-badge&logo=github&logoColor=white&color=8A2BE2" alt="GitHub Stars" />
-  </a>
-  <a href="https://github.com/fahimahammed/dot-md/issues">
-    <img src="https://img.shields.io/github/issues/fahimahammed/dot-md?style=for-the-badge&logo=github&logoColor=white&color=8A2BE2" alt="GitHub Issues" />
+    <img src="https://img.shields.io/github/license/fahimahammed/dot-md?style=flat-square&logo=git&logoColor=white&color=475569" alt="MIT License" />
   </a>
 </p>
 
@@ -26,7 +20,7 @@
 
 ## Summary
 
-**dot-md** is a premium, developer-first Chrome Extension (built with Manifest V3, React, and TypeScript) designed to instantly scrape and convert cluttered webpages into clean, structured Markdown. 
+**dot-md** is a developer-first Chrome Extension (built with Manifest V3, React, and TypeScript) designed to instantly scrape and convert cluttered webpages into clean, structured Markdown. 
 
 Whether you are preparing article content for LLMs (ChatGPT, Claude, Gemini), archiving research, or formatting technical documentation, **dot-md** removes cookie banners, advertisements, navigation bars, and footers, delivering only the core text and images you need.
 
@@ -80,7 +74,7 @@ Follow these steps to build and load the extension locally in your Google Chrome
 Follow these steps to set up the project locally for development or customization.
 
 ### Prerequisites
-- Node.js (v18.0.0 or higher recommended)
+- Node.js (v22.0.0 or higher recommended)
 - npm (v9.0.0 or higher)
 
 ### 1. Clone & Install Dependencies
@@ -148,7 +142,3 @@ dot-md/
 ## License
 
 This project is licensed under the terms of the MIT License. You are free to modify, distribute, and build upon this project for both personal and commercial applications. For full terms, refer to the [LICENSE](LICENSE) file.
-
-```
-Copyright (c) 2026 Fahim Ahammed Firoz
-```
