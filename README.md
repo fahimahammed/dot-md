@@ -167,3 +167,5 @@ dot-md/
 ## License
 
 This project is licensed under the terms of the MIT License. You are free to modify, distribute, and build upon this project for both personal and commercial applications. For full terms, refer to the [LICENSE](LICENSE) file.
+
+---
